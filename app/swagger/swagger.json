@@ -1,0 +1,899 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": " prouduct details portal API Documentation in Node.js Using Swagger",
+    "description": "product details portal application",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "name": "auth",
+      "in": "header",
+      "type": "apiKey",
+      "description": "JWT Authorization header"
+    }
+  },
+  "basePath": "/user/api",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users"
+    }
+  ],
+  "produces": ["application/json"],
+  "paths": {
+    "/user/add_user": {
+      "post": {
+        "summary": "Create new user",
+        "tags": ["User"],
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/users"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/users"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "User created successfully"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "summary": "Login",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "userLogin",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/userLogin"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "Login Successful"
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Id of the user which is to be searched",
+          "type": "string"
+        }
+      ],
+      "produces": ["application/json"],
+      "get": {
+        "tags": ["Users"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Get user by id",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/users"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/user/delete/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Id of the user which is to be searched",
+          "type": "string"
+        }
+      ],
+      "produces": ["application/json"],
+      "delete": {
+        "tags": ["Users"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Get user by id",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/users"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/user/update/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of user that we want to find",
+          "type": "string"
+        }
+      ],
+      "put": {
+        "summary": "Update user with give ID",
+        "tags": ["Users"],
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/users"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User is updated",
+            "schema": {
+              "$ref": "#/definitions/users"
+            }
+          }
+        }
+      }
+    },
+    "/user/user_list": {
+      "get": {
+        "tags": ["Users"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Get all users",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/users"
+            }
+          }
+        }
+      }
+    },
+    "/product/add_product": {
+      "post": {
+        "summary": "Create new product",
+        "tags": ["products"],
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "name": "product",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/product"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/product"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "User created successfully"
+          }
+        }
+      }
+    },
+    "/product/list_pro": {
+      "get": {
+        "tags": ["product"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Get all products",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/product"
+            }
+          }
+        }
+      }
+    },
+    "/product/list_pro/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Id of the user which is to be searched",
+          "type": "string"
+        }
+      ],
+      "produces": ["application/json"],
+      "get": {
+        "tags": ["product"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Get product by id",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/product"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/product/upload_pro": {
+      "parameters": [
+        {
+          "name": "upfile",
+          "in": "formData",
+          "required": true,
+          "description": "Id of the user which is to be searched",
+          "type": "file"
+        }
+      ],
+      "produces": ["application/json"],
+      "post": {
+        "tags": ["product"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Get product by id",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/product"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/product/update_pro/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of user that we want to find",
+          "type": "string"
+        }
+      ],
+      "put": {
+        "summary": "Update user with give ID",
+        "tags": ["product"],
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "product is updated",
+            "schema": {
+              "$ref": "#/definitions/product"
+            }
+          }
+        }
+      }
+    },
+    "/product/delete_pro/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Id of the product which is to be searched",
+          "type": "string"
+        }
+      ],
+      "produces": ["application/json"],
+      "delete": {
+        "tags": ["product"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Get product by id",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/product"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/order/add_order": {
+      "post": {
+        "summary": "Create new order",
+        "tags": ["order"],
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "name": "order",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/order"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/order"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "order created successfully"
+          }
+        }
+      }
+    },
+    "/order/list_order": {
+      "get": {
+        "tags": ["order"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Get all order",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/order"
+            }
+          }
+        }
+      }
+    },
+    "/order/listId_order/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Id of the user which is to be searched",
+          "type": "string"
+        }
+      ],
+      "produces": ["application/json"],
+      "get": {
+        "tags": ["order"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Get order by id",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/order"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/order/delete_order/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Id of the user which is to be searched",
+          "type": "string"
+        }
+      ],
+      "produces": ["application/json"],
+      "delete": {
+        "tags": ["order"],
+        "security": [{ "Bearer": [] }],
+        "summary": "delete order by id",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/order"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/order/sort_order": {
+      "get": {
+        "tags": ["order"],
+        "security": [{ "Bearer": [] }],
+        "summary": "sorting all order",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/order"
+            }
+          }
+        }
+      }
+    },
+    "/order/date_order": {
+      "parameters": [
+        {
+          "name": "search",
+          "in": "query",
+          "required": true,
+          "description": "Id of the user which is to be searched",
+          "type": "string"
+        }
+      ],
+      "produces": ["application/json"],
+      "get": {
+        "tags": ["order"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Get date by id",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/order"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/order/list_name_order": {
+      "parameters": [
+        {
+          "name": "search",
+          "in": "query",
+          "required": true,
+          "description": "Id of the user which is to be searched",
+          "type": "string"
+        }
+      ],
+      "produces": ["application/json"],
+      "get": {
+        "tags": ["order"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Get date by search",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/order"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/order/update_order/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of user that we want to find and update",
+          "type": "string"
+        }
+      ],
+      "put": {
+        "summary": "Update order with give ID",
+        "tags": ["order"],
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "name": "order",
+            "in": "body",
+            "description": "User with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/order"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "order is updated",
+            "schema": {
+              "$ref": "#/definitions/product"
+            }
+          }
+        }
+      }
+    },
+    "/order/cancel_order_count": {
+      "get": {
+        "tags": ["order"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Get all cancel order",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/order"
+            }
+          }
+        }
+      }
+    },
+    "/order/cancel_order/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Id of the cancel order which is to be searched",
+          "type": "string"
+        }
+      ],
+      "produces": ["application/json"],
+      "get": {
+        "tags": ["order"],
+        "security": [{ "Bearer": [] }],
+        "summary": "cancel order by id",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/order"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/order/total_order": {
+      "get": {
+        "tags": ["order"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Get all total order",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/order"
+            }
+          }
+        }
+      }
+    },
+    "/coupon/add_coupon": {
+      "post": {
+        "summary": "Create new coupon",
+        "tags": ["coupon"],
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "name": "coupon",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/coupon"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/coupon"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "coupon created successfully"
+          }
+        }
+      }
+    },
+    "/coupon/get_coupon": {
+      "get": {
+        "tags": ["coupon"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Get all coupon",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/coupon"
+            }
+          }
+        }
+      }
+    },
+    "/coupon/getbyid_coupon/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Id of the coupon which is to be searched",
+          "type": "string"
+        }
+      ],
+      "produces": ["application/json"],
+      "get": {
+        "tags": ["coupon"],
+        "security": [{ "Bearer": [] }],
+        "summary": "coupon order by id",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/coupon"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/coupon/update_coupon/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of user that we want to find and update",
+          "type": "string"
+        }
+      ],
+      "put": {
+        "summary": "Update coupon with give ID",
+        "tags": ["coupon"],
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "name": "order",
+            "in": "body",
+            "description": "User with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/coupon"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "coupon is updated",
+            "schema": {
+              "$ref": "#/definitions/coupon"
+            }
+          }
+        }
+      }
+    },
+    "/coupon/delete_coupon/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Id of the coupon which is to be searched",
+          "type": "string"
+        }
+      ],
+      "produces": ["application/json"],
+      "delete": {
+        "tags": ["coupon"],
+        "security": [{ "Bearer": [] }],
+        "summary": "delete order by id",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/coupon"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "securitySchemes": {
+      "add_user": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "users": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "String"
+        },
+        "email": {
+          "type": "String",
+          "unique": true
+        },
+        "phone": {
+          "type": "String",
+          "unique": true
+        },
+        "password": {
+          "type": "String"
+        },
+        "admin": {
+          "type": "Boolean",
+          "default": false
+        }
+      },
+      "example": {
+        "name": "DeepakKumar",
+        "email": "timrocks@gmail.com",
+        "phone": "7010744555",
+        "password": "abcd123"
+      }
+    },
+    "userLogin": {
+      "title": "userLogin",
+      "example": {
+        "username": "sasi123@gmail.com",
+        "password": "abcd123"
+      },
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": ["username", "password"]
+    },
+    "product": {
+      "type": "object",
+      "properties": {
+        "productID": { "type": "Number" },
+        "productName": { "type": "String" },
+        "brand": { "type": "String" },
+        "model": { "type": "Number" },
+        "category": { "type": "String" },
+        "price": { "type": "Number" },
+        "date": { "type": "String" },
+        "color": { "type": "String" },
+        "qty": { "type": "Number", "default": 1 }
+      },
+      "example": {
+        "productID": 1,
+        "productName": "sony ps6 ",
+        "brand": "sony",
+        "model": 5589,
+        "category": "playstation",
+        "price": 44000,
+        "date": "01/05/2022",
+        "color": "black red",
+        "qty": 1
+      }
+    },
+    "order": {
+      "type": "object",
+      "properties": {
+        "customer": {
+          "type": "string"
+        },
+        "orderItems": {
+          "type": "Array"
+        },
+        "shippingAddress": {
+          "type": "object"
+        },
+        "totalAmount": {
+          "type": "Number"
+        },
+        "created": { "type": "Date" },
+        "date": { "type": "String" },
+        "couponID": { "type": "string" },
+        "cancelOrder": {
+          "type": "Boolean",
+          "default": false
+        }
+      },
+      "example": {
+        "customer": "6373121bd91f9967c72ef019",
+        "orderItems": ["6371d11e91a1cdcccabe0b7e", "636b72380d9dd979aa201de7"],
+        "shippingAddress": {
+          "address": "007 IT street",
+          "city": "chennai",
+          "postalCode": "600101",
+          "country": "india"
+        },
+        "date": "20-11-2022",
+        "couponID": "637245cbde4a55249ac37a5f",
+        "cancelOrder": false
+      }
+    },
+    "coupon": {
+      "type": "object",
+      "properties": {
+        "offerName": { "type": "String" },
+        "couponCode": { "type": "String" },
+        "startDate": { "type": "String" },
+        "endDate": { "type": "String" },
+        "type": { "type": "String" },
+        "value": { "type": "Number" },
+        "couponStatus": { "type": "Boolean" }
+      },
+      "example": {
+        "offerName": "doubleDhamakka",
+        "couponCode": "double100",
+        "startDate": "10-11-2022",
+        "endDate": "25-11-2022",
+        "type": "amount",
+        "value": 100
+      }
+    }
+  }
+}
